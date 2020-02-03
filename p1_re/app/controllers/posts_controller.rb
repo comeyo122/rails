@@ -12,6 +12,7 @@ class PostsController < ApplicationController
   
     def new
       @post=Post.new
+      
     end
   
     def create
@@ -25,6 +26,7 @@ class PostsController < ApplicationController
       @post = Post.find_by(id: params[:id])
       @post.hit+=1
       @post.save
+      @like = @post.likes.find_by(user_id: current_user.id)
     end
   
     def destroy
@@ -41,6 +43,13 @@ class PostsController < ApplicationController
   
     def edit
       @post = Post.find_by(id: params[:id])
+    end
+
+    def toggle_like
+      @post = Post.find_by(id: params[:id])
+      @post.likes.find_by(post_id: params[:id]) ? current_user.likes.find_by(post_id: params[:id]).destroy: current_user.likes.create(post_id: params[:id], user_id: current_user.id)
+      @like=@post.likes.find_by(post_id: params[:id])
+      redirect_to post_path
     end
 
     private 
