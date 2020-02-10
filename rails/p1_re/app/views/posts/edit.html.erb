@@ -1,0 +1,19 @@
+<%= form_for @post do |f| %>
+<div class="card text-center container">
+  <div class="card-header" align="left">
+    <%= f.label :제목 %>
+    <%= f.text_area :title, class: "form-control", placeholer: "title" ,cols: "30", rows: "1" %><br />
+  </div>
+  <div class="card-body" align="left">
+    <%= f.label :내용 %><br />
+    <%= f.text_area :body, class: "form-control", placeholer: "body", cols: "30", rows: "10" %>
+  </div>
+  <br />
+  <div style="text-align:right">
+    <%= f.submit "수정하기", class:"actions" %>
+    <button class:"actions">
+      <%= link_to "돌아가기", posts_path %>
+    </button>
+  </div>
+</div>
+<% end %>
