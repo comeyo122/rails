@@ -1,0 +1,71 @@
+<h1>Show page</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @post.id %>
+      <td><%= @post.title %>
+      <td><%= @post.description %>
+    </tr>
+  </tbody>
+</table>
+
+<div class="d-flex justify-content-end">
+  <% if !@post.user.nil? && !current_user.nil? %>
+  <% if  current_user.id == @post.user_id %>
+  <%= button_to "Edit" , edit_post_path(@post.id), {method: :get, class:"btn btn-dark" }%> &nbsp;
+  <%= button_to "Delete", post_path(@post.id), {method: :delete, class:"btn btn-dark"} %> &nbsp;
+  <% end %>
+  <% end %>
+</div>
+
+<br /><br />
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col" colspan="4">댓글 수</th>
+    </tr>
+  </thead>
+  <tbody>
+     <% @post.comment.each do |f| %>
+        <tr>
+          <th scope="row" colspan="4">
+            <div class="card">
+              <div class="card-body">
+                <span style="font-size:25px;"><%= f.user.email %></span>&nbsp;&nbsp;
+                <span style="font-size:13px;"><%= f.created_at %></span>
+                <p class="card-text"><%= f.comment %></p>
+              </div>
+            </div>
+          </th>
+        </tr>
+        <tr>
+    <% end %>
+      <th scope="row" colspan="4">
+        <div class="card">
+          <div class="card-header">
+            댓글쓰기
+          </div>
+          <div class="card-body">
+            <%= form_for @comment, url: comments_path, method: :POST do |f| %>
+             <%= f.label :comment %> <br />
+             <%= f.text_area :comment, class: "form-control", placeholer: "comment" %><br />
+             <%= f.hidden_field :user_id, class: "form-control", value: current_user.id %>
+             <%= f.hidden_field :post_id, class: "form-control", value: @post.id %>
+             <div style="float:right">
+            <%= f.submit "등록", class:"btn btn-primary" %>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </th>
+    </tr>
+  </tbody>
+</table>
