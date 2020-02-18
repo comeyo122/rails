@@ -1,0 +1,20 @@
+<th scope="row" colspan="4">
+  <div class="card" id=<%= comment.id %>>
+    <div class="card-body" id="body-<%= comment.id %>">
+      <span style="font-size:25px;"><%= comment.user.email %></span>&nbsp;&nbsp;
+      <span style="font-size:13px;"><%= comment.created_at %></span>
+      <span
+        style="float:right"><%= button_to "cancel", edit_comment_path(comment.id), {method: :get, class:"btn btn-outline-info-sm", remote: true} %></span>
+      &nbsp;
+
+      <%= form_for comment, url: comments_path, remote: true, method: :PUT do |f| %>
+      <%= f.label :comment %> <br />
+      <%= f.text_area :comment, id: "input_form", class: "form-control", placeholer: "" %><br />
+      <%= f.hidden_field :user_id, class: "form-control", value: comment.user_id %>
+      <%= f.hidden_field :post_id, class: "form-control", value: comment.post_id %>
+      <div style="float:right">
+        <%= f.submit "update", class:"btn btn-primary" %>
+      </div>
+      <%end%>
+    </div>
+</th>

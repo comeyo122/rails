@@ -12,17 +12,22 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    @comment = Comment.find_by(id: params[:id])
+    render "edit.js", locals: {comment: @comment}
   end
   
   def show
   end
   
   def update
+    @comment = Comment.create comment_params
+    render "update.js", locals: {comment: @comment}
   end
 
   def destroy
     @comment = Comment.find_by(id: params[:id])
     render "destroy.js", locals: {comment: @comment}
+    @comment.destroy
   end
 
   private

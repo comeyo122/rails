@@ -38,10 +38,11 @@
     <tr>
       <th scope="row" colspan="4">
         <div class="card" id=<%= f.id %> >
-          <div class="card-body">
+          <div class="card-body" id="body-<%= f.id %>" >
             <span style="font-size:25px;"><%= f.user.email %></span>&nbsp;&nbsp;
             <span style="font-size:13px;"><%= f.created_at %></span>
             <span style="float:right"><%= button_to "Delete", comment_path(f.id), {method: :delete, class:"btn btn-outline-info-sm", remote: true} %></span> &nbsp;
+            <span style="float:right"><%= button_to "Edit", edit_comment_path(f.id), {method: :get, class:"btn btn-outline-info-sm", remote: true} %></span> &nbsp;
             <p class="card-text"><%= f.comment %></p>
           </div>
         </div>
