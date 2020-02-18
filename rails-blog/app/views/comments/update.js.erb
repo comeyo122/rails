@@ -1,0 +1,2 @@
+var html="<%= j(render(partial: 'comments/updated.html.erb', locals: {comment: comment}))%>"
+$("#<%= comment.id %>").replaceWith(html)

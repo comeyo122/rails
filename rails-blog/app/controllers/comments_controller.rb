@@ -20,7 +20,9 @@ class CommentsController < ApplicationController
   end
   
   def update
-    @comment = Comment.create comment_params
+    @comment = Comment.find_by(id: params[:id])
+    @comment.comment = params[:comment][:comment]
+    @comment.save
     render "update.js", locals: {comment: @comment}
   end
 
@@ -35,6 +37,9 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:comment, :user_id, :post_id)
   end
 
+  def update_params
+    params.require(:comment).permit(:comment_id, :comment, :user_id, :post_id)
+  end
   private
   def load_post
     @post = Post.find_by(id: params[:id])

@@ -7,11 +7,10 @@
         style="float:right"><%= button_to "cancel", edit_comment_path(comment.id), {method: :get, class:"btn btn-outline-info-sm", remote: true} %></span>
       &nbsp;
 
-      <%= form_for comment, url: comments_path, remote: true, method: :PUT do |f| %>
+      <%= form_for comment, url: comment_path, remote: true, method: :PUT do |f| %>
       <%= f.label :comment %> <br />
       <%= f.text_area :comment, id: "input_form", class: "form-control", placeholer: "" %><br />
-      <%= f.hidden_field :user_id, class: "form-control", value: comment.user_id %>
-      <%= f.hidden_field :post_id, class: "form-control", value: comment.post_id %>
+      <%= f.hidden_field :comment_id, class: "form-control", value: comment.id%>
       <div style="float:right">
         <%= f.submit "update", class:"btn btn-primary" %>
       </div>
