@@ -5,7 +5,7 @@
     <p class="lead">This is Most Hit</p>
     <a href="#" class="btn btn-primary btn-lg">More!!</a>
   </header>
-
+   <span style="float:right"><%= button_to "new" , new_post_path, {method: :get} %></span><br/><br/><br/>
   <div class= "row">
     <% @post.each do |post| %>
       <%= link_to post_path(post), class:"text-dark", style:"text-decoration: none;" do %>
@@ -34,7 +34,6 @@
                 <% end %>
                 </a>
               </p>
-              
               <% if !post.user.nil? && !current_user.nil? %>
                 <% if  current_user.id == post.user_id %>
                   <%= link_to "Edit" , edit_post_path(post)%>  &nbsp; 
