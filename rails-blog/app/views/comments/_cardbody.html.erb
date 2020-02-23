@@ -1,0 +1,13 @@
+<div class="card" id=<%= comment.id %>>
+  <div class="card-body" id="body-<%= comment.id %>">
+    <span style="font-size:25px;"><%= comment.user.email %></span>&nbsp;&nbsp;
+    <span style="font-size:13px;"><%= comment.created_at %></span>
+    <span
+      style="float:right"><%= button_to "Delete", comment_path(comment.id), {method: :delete, class:"btn btn-outline-info-sm", remote: true} %></span>
+    &nbsp;
+    <span
+      style="float:right"><%= button_to "Edit", edit_comment_path(comment.id), {method: :get, class:"btn btn-outline-info-sm", remote: true} %></span>
+    &nbsp;
+    <p class="card-text"><%= comment.comment %></p>
+  </div>
+</div>

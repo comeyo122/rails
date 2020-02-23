@@ -21,6 +21,7 @@ class PostsController < ApplicationController
   
   def show
     @comment = Comment.new
+    @kaminari = @post.comment.page params[:page]
   end
   
   def update
